@@ -14,7 +14,7 @@
 /// 编码器编码后回调
 @protocol LFVideoEncodingDelegate <NSObject>
 @required
-- (void)videoEncoder:(nullable id<LFVideoEncoding>)encoder videoFrame:(nullable LFVideoFrame *)frame;
+- (void)videoEncoder:(nullable id<LFVideoEncoding>)encoder videoFrame:(nullable LFVideoFrame *)frame buffer:(nullable CMSampleBufferRef)sampleBuffer;
 @end
 
 /// 编码器抽象的接口

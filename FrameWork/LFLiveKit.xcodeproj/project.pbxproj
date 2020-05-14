@@ -54,6 +54,11 @@
 		31ACD11B2106CF5E009075DF /* LFUtils.h in Headers */ = {isa = PBXBuildFile; fileRef = 31ACD1182106CF5E009075DF /* LFUtils.h */; };
 		31ACD11C2106CF5E009075DF /* LFUtils.m in Sources */ = {isa = PBXBuildFile; fileRef = 31ACD1192106CF5E009075DF /* LFUtils.m */; };
 		31ACD11D2106CF5E009075DF /* LFUtils.m in Sources */ = {isa = PBXBuildFile; fileRef = 31ACD1192106CF5E009075DF /* LFUtils.m */; };
+		832CDD3A246CEE8C009BDB5B /* MP4Writer.m in Sources */ = {isa = PBXBuildFile; fileRef = 832CDD38246CEE8B009BDB5B /* MP4Writer.m */; };
+		832CDD3B246CEE8C009BDB5B /* MP4Writer.m in Sources */ = {isa = PBXBuildFile; fileRef = 832CDD38246CEE8B009BDB5B /* MP4Writer.m */; };
+		832CDD3C246CEE8C009BDB5B /* MP4Writer.m in Sources */ = {isa = PBXBuildFile; fileRef = 832CDD38246CEE8B009BDB5B /* MP4Writer.m */; };
+		832CDD3D246CEE8C009BDB5B /* MP4Writer.h in Headers */ = {isa = PBXBuildFile; fileRef = 832CDD39246CEE8B009BDB5B /* MP4Writer.h */; };
+		832CDD3E246CEE8C009BDB5B /* MP4Writer.h in Headers */ = {isa = PBXBuildFile; fileRef = 832CDD39246CEE8B009BDB5B /* MP4Writer.h */; };
 		84358FF41DD1FEB600811FC7 /* GLProgram.h in Headers */ = {isa = PBXBuildFile; fileRef = 84358E871DD1FEB500811FC7 /* GLProgram.h */; };
 		84358FF51DD1FEB600811FC7 /* GLProgram.m in Sources */ = {isa = PBXBuildFile; fileRef = 84358E881DD1FEB500811FC7 /* GLProgram.m */; };
 		84358FF61DD1FEB600811FC7 /* GPUImage.h in Headers */ = {isa = PBXBuildFile; fileRef = 84358E891DD1FEB500811FC7 /* GPUImage.h */; settings = {ATTRIBUTES = (Public, ); }; };
@@ -1213,6 +1218,8 @@
 		31ACD0B121006451009075DF /* RKReplayKitGLContext.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = RKReplayKitGLContext.m; sourceTree = "<group>"; };
 		31ACD1182106CF5E009075DF /* LFUtils.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = LFUtils.h; sourceTree = "<group>"; };
 		31ACD1192106CF5E009075DF /* LFUtils.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = LFUtils.m; sourceTree = "<group>"; };
+		832CDD38246CEE8B009BDB5B /* MP4Writer.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = MP4Writer.m; sourceTree = "<group>"; };
+		832CDD39246CEE8B009BDB5B /* MP4Writer.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MP4Writer.h; sourceTree = "<group>"; };
 		84358E871DD1FEB500811FC7 /* GLProgram.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = GLProgram.h; sourceTree = "<group>"; };
 		84358E881DD1FEB500811FC7 /* GLProgram.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = GLProgram.m; sourceTree = "<group>"; };
 		84358E891DD1FEB500811FC7 /* GPUImage.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = GPUImage.h; sourceTree = "<group>"; };
@@ -2426,6 +2433,8 @@
 				84D8B5A51D768B6E00752B56 /* LFLiveKit.h */,
 				84D8B5A61D768B6E00752B56 /* LFLiveSession.h */,
 				84D8B5A71D768B6E00752B56 /* LFLiveSession.m */,
+				832CDD39246CEE8B009BDB5B /* MP4Writer.h */,
+				832CDD38246CEE8B009BDB5B /* MP4Writer.m */,
 				84D8B5A81D768B6E00752B56 /* objects */,
 				84D8B5B31D768B6E00752B56 /* publish */,
 				84358E851DD1FEB500811FC7 /* Vendor */,
@@ -3054,6 +3063,7 @@
 				31ACD0AD210063FB009075DF /* RKGLProgram.h in Headers */,
 				BE4934FF20076CA3003F5291 /* QBGLAntiqueFilter.h in Headers */,
 				8495F68A1DB8F1EE00542124 /* LFStreamRTMPSocket.h in Headers */,
+				832CDD3E246CEE8C009BDB5B /* MP4Writer.h in Headers */,
 				BE4933C220076348003F5291 /* LFVideoCaptureInterface.h in Headers */,
 				BE49352D20076CA3003F5291 /* QBGLWaldenFilter.h in Headers */,
 				BE4934D720076CA3003F5291 /* QBGLHealthyFilter.h in Headers */,
@@ -3108,6 +3118,7 @@
 				843590251DD1FEB600811FC7 /* GPUImageColorLocalBinaryPatternFilter.h in Headers */,
 				BE49353420076CA3003F5291 /* QBGLLatteFilter.h in Headers */,
 				843590391DD1FEB600811FC7 /* GPUImageDifferenceBlendFilter.h in Headers */,
+				832CDD3D246CEE8C009BDB5B /* MP4Writer.h in Headers */,
 				843591441DD1FEB600811FC7 /* GPUImageContext.h in Headers */,
 				843590331DD1FEB600811FC7 /* GPUImageCrosshairGenerator.h in Headers */,
 				BE35EB911F72736600B615DF /* LFSimplePing.h in Headers */,
@@ -3489,6 +3500,7 @@
 			developmentRegion = English;
 			hasScannedForEncodings = 0;
 			knownRegions = (
+				English,
 				en,
 				Base,
 				id,
@@ -3711,6 +3723,7 @@
 				8435918E1DD20A7E00811FC7 /* GPUImageDifferenceBlendFilter.m in Sources */,
 				BE4934E320076CA3003F5291 /* QBGLFairytaleFilter.m in Sources */,
 				8435918F1DD20A7E00811FC7 /* GPUImageDilationFilter.m in Sources */,
+				832CDD3B246CEE8C009BDB5B /* MP4Writer.m in Sources */,
 				31ACD0A221006316009075DF /* RKLinkedList.m in Sources */,
 				843591901DD20A7E00811FC7 /* GPUImageDirectionalNonMaximumSuppressionFilter.m in Sources */,
 				843591911DD20A7E00811FC7 /* GPUImageDirectionalSobelEdgeDetectionFilter.m in Sources */,
@@ -4028,6 +4041,7 @@
 				BE4934E220076CA3003F5291 /* QBGLFairytaleFilter.m in Sources */,
 				84D8B5E11D768B6E00752B56 /* LFLiveStreamInfo.m in Sources */,
 				31ACD0A121006316009075DF /* RKLinkedList.m in Sources */,
+				832CDD3A246CEE8C009BDB5B /* MP4Writer.m in Sources */,
 				8435904A1DD1FEB600811FC7 /* GPUImageExclusionBlendFilter.m in Sources */,
 				84D8B5C31D768B6E00752B56 /* LFNALUnit.cpp in Sources */,
 				84D8B5C01D768B6E00752B56 /* LFAVEncoder.mm in Sources */,
@@ -4275,6 +4289,7 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				832CDD3C246CEE8C009BDB5B /* MP4Writer.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

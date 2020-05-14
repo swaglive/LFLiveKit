@@ -235,8 +235,8 @@ static void VideoCompressonOutputCallback(void *VTref, void *VTFrameRef, OSStatu
                 spsAdded = NO;
             }
             
-            if (videoEncoder.h264Delegate && [videoEncoder.h264Delegate respondsToSelector:@selector(videoEncoder:videoFrame:)]) {
-                [videoEncoder.h264Delegate videoEncoder:videoEncoder videoFrame:videoFrame];
+            if (videoEncoder.h264Delegate && [videoEncoder.h264Delegate respondsToSelector:@selector(videoEncoder:videoFrame:buffer:)]) {
+                [videoEncoder.h264Delegate videoEncoder:videoEncoder videoFrame:videoFrame buffer:sampleBuffer];
             }
             
             if (videoEncoder->enabledWriteVideoFile) {

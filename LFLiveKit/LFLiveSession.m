@@ -20,6 +20,7 @@
 #import "RKVideoCapture.h"
 #import "RKAudioMix.h"
 #import "RKReplayKitCapture.h"
+#import "MP4Writer.h"
 
 @interface LFLiveSession ()<LFAudioCaptureDelegate, LFVideoCaptureInterfaceDelegate, LFAudioEncodingDelegate, LFVideoEncodingDelegate, LFStreamSocketDelegate, RKReplayKitCaptureDelegate>
 
@@ -60,6 +61,10 @@
 
 @property (nonatomic, assign, readwrite) LFLiveInternetState internetSignal;
 
+#pragma mark - MP4Writing
+@property (nonatomic, strong) MP4Writer         *mp4Writer;
+@property (nonatomic, assign) BOOL              writeMP4;
+@property (nonatomic, strong) dispatch_queue_t  video_capture_queue;
 @end
 
 /**  时间戳 */
@@ -114,6 +119,8 @@
         _adaptiveBitrate = NO;
         _captureType = captureType;
         _glContext = glContext;
+        _video_capture_queue = dispatch_queue_create(@"write.video.queue", DISPATCH_QUEUE_SERIAL);
+        _mp4Writer = [MP4Writer new];
     }
     return self;
 }
@@ -152,6 +159,9 @@
                                         @"vbr": @(videoBitRate)}];
     
     [self.socket start];
+    [self.mp4Writer prepareWithConfig:self.videoConfiguration];
+    self.writeMP4 = YES;
+    [self.mp4Writer startWriting];
 }
 
 - (BOOL)updateStreamURL:(nonnull NSString *)url {
@@ -199,6 +209,11 @@
     self.uploading = NO;
     [self.socket stop];
     self.socket = nil;
+    
+    if (self.writeMP4 && self.mp4Writer.writing) {
+        [self.mp4Writer stopWriting];
+    }
+    self.writeMP4 = NO;
 }
 
 - (void)pushVideo:(nullable CVPixelBufferRef)pixelBuffer {
@@ -440,7 +455,7 @@
     }
 }
 
-- (void)videoEncoder:(nullable id<LFVideoEncoding>)encoder videoFrame:(nullable LFVideoFrame *)frame {
+- (void)videoEncoder:(nullable id<LFVideoEncoding>)encoder videoFrame:(nullable LFVideoFrame *)frame buffer:(nullable CMSampleBufferRef)sampleBuffer {
     if (!self.uploading) {
         return;
     }
