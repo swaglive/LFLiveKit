@@ -39,7 +39,7 @@
         
         
 #ifdef DEBUG
-        enabledWriteVideoFile = NO;
+        enabledWriteVideoFile = YES;
         [self initForFilePath];
 #endif
     }

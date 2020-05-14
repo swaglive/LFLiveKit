@@ -42,7 +42,7 @@ static NSTimeInterval const kSessionLockDuration = 2.0f;
         [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(willEnterBackground:) name:UIApplicationWillResignActiveNotification object:nil];
         [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(willEnterForeground:) name:UIApplicationDidBecomeActiveNotification object:nil];
 #ifdef DEBUG
-        enabledWriteVideoFile = NO;
+        enabledWriteVideoFile = YES;
         [self initForFilePath];
 #endif
         
