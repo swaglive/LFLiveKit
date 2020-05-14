@@ -201,8 +201,8 @@
         videoFrame.sps = _spsData;
         videoFrame.pps = _ppsData;
 
-        if(self.h264Delegate && [self.h264Delegate respondsToSelector:@selector(videoEncoder:videoFrame:)]){
-            [self.h264Delegate videoEncoder:self videoFrame:videoFrame];
+        if(self.h264Delegate && [self.h264Delegate respondsToSelector:@selector(videoEncoder:videoFrame:buffer:)]){
+            [self.h264Delegate videoEncoder:self videoFrame:videoFrame buffer:nil];
         }
     }
     
