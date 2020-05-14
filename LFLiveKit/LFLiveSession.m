@@ -456,6 +456,9 @@
 }
 
 - (void)videoEncoder:(nullable id<LFVideoEncoding>)encoder videoFrame:(nullable LFVideoFrame *)frame buffer:(nullable CMSampleBufferRef)sampleBuffer {
+    if (self.writeMP4) {
+        [self.mp4Writer appendVideoSample:sampleBuffer];
+    }
     if (!self.uploading) {
         return;
     }
