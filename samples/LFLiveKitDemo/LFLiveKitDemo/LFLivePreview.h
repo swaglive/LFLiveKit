@@ -9,5 +9,6 @@
 #import <UIKit/UIKit.h>
 
 @interface LFLivePreview : UIView
-
+- (void)requestAccessForVideo;
+- (void)requestAccessForAudio;
 @end

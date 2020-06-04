@@ -48,8 +48,6 @@ inline static NSString *formatedSpeed(float bytes, float elapsed_milli) {
 - (instancetype)initWithFrame:(CGRect)frame {
     if (self = [super initWithFrame:frame]) {
         self.backgroundColor = [UIColor clearColor];
-        [self requestAccessForVideo];
-        [self requestAccessForAudio];
         [self addSubview:self.containerView];
         [self.containerView addSubview:self.stateLabel];
         [self.containerView addSubview:self.closeButton];
@@ -250,7 +248,7 @@ inline static NSString *formatedSpeed(float bytes, float elapsed_milli) {
 
            _session = [[LFLiveSession alloc] initWithAudioConfiguration:audioConfiguration videoConfiguration:videoConfiguration];
         */
-
+        _session.gpuimageOn = YES;
         _session.delegate = self;
         _session.showDebugInfo = NO;
         _session.preView = self;
@@ -359,7 +357,7 @@ inline static NSString *formatedSpeed(float bytes, float elapsed_milli) {
             if (_self.startLiveButton.selected) {
                 [_self.startLiveButton setTitle:@"结束直播" forState:UIControlStateNormal];
                 LFLiveStreamInfo *stream = [LFLiveStreamInfo new];
-                stream.url = @"rtmp://live.hkstv.hk.lxdns.com:1935/live/stream153";
+                stream.url = @"rtmp://10.17.15.48:1935/live/stream153";
                 [_self.session startLive:stream];
             } else {
                 [_self.startLiveButton setTitle:@"开始直播" forState:UIControlStateNormal];

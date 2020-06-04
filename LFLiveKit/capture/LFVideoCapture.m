@@ -479,8 +479,8 @@ static NSString * const kColorFilterOverlayKey = @"overlay";
     @autoreleasepool {
         GPUImageFramebuffer *imageFramebuffer = output.framebufferForOutput;
         CVPixelBufferRef pixelBuffer = [imageFramebuffer pixelBuffer];
-        if (pixelBuffer && [_self.delegate respondsToSelector:@selector(captureOutput:pixelBuffer:atTime:)]) {
-            [_self.delegate captureOutput:_self pixelBuffer:pixelBuffer atTime:time];
+        if (pixelBuffer && [_self.delegate respondsToSelector:@selector(captureOutput:pixelBuffer:atTime:didUpdateVideoConfiguration:)]) {
+            [_self.delegate captureOutput:_self pixelBuffer:pixelBuffer atTime:time didUpdateVideoConfiguration:NO];
         }
     }
 }
