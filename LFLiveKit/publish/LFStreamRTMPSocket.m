@@ -322,6 +322,10 @@ static inline void set_rtmp_str(AVal *val, const char *str)
     //设置可写，即发布流，这个函数必须在连接前使用，否则无效
     PILI_RTMP_EnableWrite(_rtmp);
     
+    if (_error.code < 0) {
+        goto Failed;
+    }
+    
     //连接服务器
     if (PILI_RTMP_Connect(_rtmp, NULL, &_error) == FALSE) {
         goto Failed;
