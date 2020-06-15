@@ -2395,9 +2395,17 @@ static int
             }
         } else if (AVMATCH(&methodInvoked, &av_createStream)) {
             r->m_stream_id = (int)AMFProp_GetNumber(AMF_GetProp(&obj, NULL, 3));
-
+            
             if (r->Link.protocol & RTMP_FEATURE_WRITE) {
                 SendPublish(r, &error);
+                if (SendPublish(r, &error) == 0) {
+                    RTMP_Log(RTMP_LOGWARNING, "1!!!!!! PILI_RTMP SendPublish failed !!!!!");
+                    RTMP_Log(RTMP_LOGWARNING, "2!!!!!! PILI_RTMP SendPublish failed !!!!!");
+                    return 0;
+                } else {
+                    RTMP_Log(RTMP_LOGERROR, "1!!!!!! PILI_RTMP SendPublish success !!!!!");
+                    RTMP_Log(RTMP_LOGERROR, "2!!!!!! PILI_RTMP SendPublish success !!!!!");
+                }
             } else {
                 if (r->Link.lFlags & RTMP_LF_PLST)
                     SendPlaylist(r, &error);
