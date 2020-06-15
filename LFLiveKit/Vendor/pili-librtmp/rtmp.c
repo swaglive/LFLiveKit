@@ -2371,7 +2371,15 @@ static int
             }
             if (r->Link.protocol & RTMP_FEATURE_WRITE) {
                 SendReleaseStream(r, &error);
-                SendFCPublish(r, &error);
+                if (SendFCPublish(r, &error) == 0) {
+                    RTMP_Log(RTMP_LOGWARNING, "1!!!!!! PILI_RTMP SendFCPublish failed !!!!!");
+                    RTMP_Log(RTMP_LOGWARNING, "2!!!!!! PILI_RTMP SendFCPublish failed !!!!!");
+                    return 0;
+                } else {
+                    RTMP_Log(RTMP_LOGERROR, "1!!!!!! PILI_RTMP SendFCPublish success !!!!!");
+                    RTMP_Log(RTMP_LOGERROR, "2!!!!!! PILI_RTMP SendFCPublish success !!!!!");
+                }
+                
             } else {
                 PILI_RTMP_SendServerBW(r, &error);
                 PILI_RTMP_SendCtrl(r, 3, 0, 300, &error);
