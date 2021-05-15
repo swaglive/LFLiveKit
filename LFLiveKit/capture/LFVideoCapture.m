@@ -499,8 +499,8 @@ static NSString * const kColorFilterOverlayKey = @"overlay";
 
 - (void)applyEnlargeEyesFilters:(GPUImageFilterGroup *)filterGroup {
     self.eyeFilter = [[RKGPUImageEyeFilter alloc] init];
-    self.eyeFilter.leftEyePosition = CGPointMake(40, 100);
-    self.eyeFilter.rightEyePosition = CGPointMake(80, 100);
+    self.eyeFilter.leftEyePosition = CGPointMake(0.38518361522073974, 0.32416098202065768);
+    self.eyeFilter.rightEyePosition = CGPointMake(0.48518361522073974, 0.32416098202065768);
 
     [filterGroup setInitialFilters:@[self.eyeFilter]];
     [filterGroup addFilter:self.eyeFilter];
