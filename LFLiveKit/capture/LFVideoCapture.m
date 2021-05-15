@@ -33,6 +33,7 @@
 #import "RKGPUImageDeepFilter.h"
 #import "RKGPUImageGlowFilter.h"
 #import "RKGPUImageMistFilter.h"
+#import "RKGPUImageEyeFilter.h"
 #import "RKGPUImageVividFilter.h"
 #import "RKGPUImagePinkyFilter.h"
 #import "RKGPUImageAdventureFilter.h"
@@ -62,6 +63,8 @@ static NSString * const kColorFilterOverlayKey = @"overlay";
 
 @property (nonatomic, strong) GPUImageVideoCamera *videoCamera;
 @property (nonatomic, strong) LFGPUImageBeautyFilter *beautyFilter;
+@property (nonatomic, strong) RKGPUImageEyeFilter *eyeFilter;
+
 @property (nonatomic, strong) GPUImageOutput<GPUImageInput> *filter;
 @property (nonatomic, strong) GPUImageCropFilter *cropfilter;
 @property (nonatomic, strong) GPUImageOutput<GPUImageInput> *output;
@@ -422,6 +425,8 @@ static NSString * const kColorFilterOverlayKey = @"overlay";
         } else {
             [self applyBeautyFilters:filterGroup];
         }
+        [self applyEnlargeEyesFilters: filterGroup];
+        
     } else {
         [self applyNormalFilters:filterGroup];
     }
@@ -494,6 +499,14 @@ static NSString * const kColorFilterOverlayKey = @"overlay";
     [self.beautyFilter addTarget:self.colorFilter];
     [filterGroup addFilter:self.colorFilter];
     [filterGroup setTerminalFilter:self.colorFilter];
+}
+
+- (void)applyEnlargeEyesFilters:(GPUImageFilterGroup *)filterGroup {
+    self.eyeFilter = [[RKGPUImageEyeFilter alloc] init];
+    self.eyeFilter.leftEyePosition = CGPointMake(100, 100);
+    self.eyeFilter.rightEyePosition = CGPointMake(300, 100);
+
+    [filterGroup addFilter:self.eyeFilter];
 }
 
 - (void)applyAdvanceBeautyFilters:(GPUImageFilterGroup *)filterGroup {
