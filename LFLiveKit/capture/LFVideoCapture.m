@@ -420,12 +420,8 @@ static NSString * const kColorFilterOverlayKey = @"overlay";
 
     // 美肌
     if (self.beautyFace) {
-        if (_useAdvanceBeauty) {
-            [self applyAdvanceBeautyFilters:filterGroup];
-        } else {
-            [self applyBeautyFilters:filterGroup];
-        }
         [self applyEnlargeEyesFilters: filterGroup];
+
         
     } else {
         [self applyNormalFilters:filterGroup];
@@ -503,8 +499,8 @@ static NSString * const kColorFilterOverlayKey = @"overlay";
 
 - (void)applyEnlargeEyesFilters:(GPUImageFilterGroup *)filterGroup {
     self.eyeFilter = [[RKGPUImageEyeFilter alloc] init];
-    self.eyeFilter.leftEyePosition = CGPointMake(100, 100);
-    self.eyeFilter.rightEyePosition = CGPointMake(300, 100);
+    self.eyeFilter.leftEyePosition = CGPointMake(40, 100);
+    self.eyeFilter.rightEyePosition = CGPointMake(80, 100);
 
     [filterGroup addFilter:self.eyeFilter];
 }

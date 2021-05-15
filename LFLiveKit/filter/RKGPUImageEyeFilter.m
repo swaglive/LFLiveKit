@@ -53,8 +53,8 @@ NSString *const kRKGPUImageEyeFragmentShaderString = SHADER_STRING
 
 - (instancetype)init {
     if (self = [super initWithFragmentShaderFromString:kRKGPUImageEyeFragmentShaderString]) {
-        [self setFloat:0.5 forUniformName:@"scaleRatio"];
-        [self setFloat:20.0 forUniformName:@"radius"];
+        [self setFloat:2.5 forUniformName:@"scaleRatio"];
+        [self setFloat:40.0 forUniformName:@"radius"];
         [self setFloat:9.0 / 16.0 forUniformName:@"aspectRatio"];
     }
     return self;
