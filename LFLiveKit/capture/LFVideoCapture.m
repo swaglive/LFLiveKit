@@ -502,7 +502,12 @@ static NSString * const kColorFilterOverlayKey = @"overlay";
     self.eyeFilter.leftEyePosition = CGPointMake(40, 100);
     self.eyeFilter.rightEyePosition = CGPointMake(80, 100);
 
+    [filterGroup setInitialFilters:@[self.eyeFilter]];
     [filterGroup addFilter:self.eyeFilter];
+    
+    [self.eyeFilter addTarget:self.colorFilter];
+    [filterGroup addFilter:self.colorFilter];
+    [filterGroup setTerminalFilter:self.colorFilter];
 }
 
 - (void)applyAdvanceBeautyFilters:(GPUImageFilterGroup *)filterGroup {
