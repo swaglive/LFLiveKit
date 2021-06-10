@@ -185,7 +185,7 @@ typedef NS_ENUM(NSUInteger, RKReplayKitSampleType) {
 @property (nonatomic) double latitude;
 @property (nonatomic, readonly, nonnull) NSDictionary *logInfo;
 
-@property (nonatomic, assign) NSUInteger size;
+@property (nonatomic, assign) NSUInteger mySize;
 
 @property (nonatomic, assign) BOOL isSuc;
 
