@@ -532,7 +532,10 @@ Failed:
     }
     
     bool isssss = [self sendPacket:RTMP_PACKET_TYPE_VIDEO data:body size:(rtmpLength) nTimestamp:frame.timestamp];
-    [_delegate size:iIndex :isssss];
+    
+    int s = strlen((char*)body);
+
+    [_delegate size:iIndex :s];
 
     free(body);
 }
