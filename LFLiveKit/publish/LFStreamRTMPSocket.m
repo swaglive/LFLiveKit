@@ -217,13 +217,9 @@ static inline void set_rtmp_str(AVal *val, const char *str)
                         _self.isSending = NO;
                         return;
                     }
-                    if(_isSend) {
-                        [_self sendVideoHeader:(LFVideoFrame *)frame];
-                    }
+                    [_self sendVideoHeader:(LFVideoFrame *)frame];
                 } else {
-                    if(_isSend) {
-                        [_self sendVideo:(LFVideoFrame *)frame];
-                    }
+                    [_self sendVideo:(LFVideoFrame *)frame];
                 }
             } else {
                 if (!_self.sendAudioHead) {
@@ -232,13 +228,11 @@ static inline void set_rtmp_str(AVal *val, const char *str)
                         _self.isSending = NO;
                         return;
                     }
-                    if(_isSend) {
-                        [_self sendAudioHeader:(LFAudioFrame *)frame];
-                    }
+                    [_self sendAudioHeader:(LFAudioFrame *)frame];
+                    
                 } else {
-                    if(_isSend) {
-                        [_self sendAudio:frame];
-                    }
+                    [_self sendAudio:frame];
+                    
                 }
             }
             
@@ -446,6 +440,7 @@ Failed:
     NSInteger spsLen = videoFrame.sps.length;
     NSInteger ppsLen = videoFrame.pps.length;
     
+    
     body = (unsigned char *)malloc(rtmpLength);
     memset(body, 0, rtmpLength);
     
@@ -497,43 +492,48 @@ Failed:
     unsigned char *body = (unsigned char *)malloc(rtmpLength);
     memset(body, 0, rtmpLength);
     
-    if (frame.isKeyFrame) {
-        body[i++] = 0x17;        // 1:Iframe  7:AVC
-    } else {
-        body[i++] = 0x27;        // 2:Pframe  7:AVC
-    }
-    body[i++] = 0x01;    // AVC NALU
-    body[i++] = 0x00;
-    body[i++] = 0x00;
-    body[i++] = 0x00;
-    
-    if (frame.isKeyFrame && frame.sps && frame.pps) {
-        /*sps*/
-        NSInteger spsLen = frame.sps.length;
-        body[i++] = (spsLen >> 24) & 0xff;
-        body[i++] = (spsLen >> 16) & 0xff;
-        body[i++] = (spsLen >>  8) & 0xff;
-        body[i++] = (spsLen) & 0xff;
-        memcpy(&body[i], frame.sps.bytes, spsLen);
-        i += spsLen;
+    if(_isSend) {
+
+        if (frame.isKeyFrame) {
+            body[i++] = 0x17;        // 1:Iframe  7:AVC
+        } else {
+            body[i++] = 0x27;        // 2:Pframe  7:AVC
+        }
+        body[i++] = 0x01;    // AVC NALU
+        body[i++] = 0x00;
+        body[i++] = 0x00;
+        body[i++] = 0x00;
         
-        /*pps*/
-        NSInteger ppsLen = frame.pps.length;
-        body[i++] = (ppsLen >> 24) & 0xff;
-        body[i++] = (ppsLen >> 16) & 0xff;
-        body[i++] = (ppsLen >>  8) & 0xff;
-        body[i++] = (ppsLen) & 0xff;
-        memcpy(&body[i], frame.pps.bytes, ppsLen);
-        i += ppsLen;
+        if (frame.isKeyFrame && frame.sps && frame.pps) {
+            /*sps*/
+            NSInteger spsLen = frame.sps.length;
+            body[i++] = (spsLen >> 24) & 0xff;
+            body[i++] = (spsLen >> 16) & 0xff;
+            body[i++] = (spsLen >>  8) & 0xff;
+            body[i++] = (spsLen) & 0xff;
+            memcpy(&body[i], frame.sps.bytes, spsLen);
+            i += spsLen;
+            
+            /*pps*/
+            NSInteger ppsLen = frame.pps.length;
+            body[i++] = (ppsLen >> 24) & 0xff;
+            body[i++] = (ppsLen >> 16) & 0xff;
+            body[i++] = (ppsLen >>  8) & 0xff;
+            body[i++] = (ppsLen) & 0xff;
+            memcpy(&body[i], frame.pps.bytes, ppsLen);
+            i += ppsLen;
+        }
+        
+        body[i++] = (frame.data.length >> 24) & 0xff;
+        body[i++] = (frame.data.length >> 16) & 0xff;
+        body[i++] = (frame.data.length >>  8) & 0xff;
+        body[i++] = (frame.data.length) & 0xff;
+        memcpy(&body[i], frame.data.bytes, frame.data.length);
     }
     
-    body[i++] = (frame.data.length >> 24) & 0xff;
-    body[i++] = (frame.data.length >> 16) & 0xff;
-    body[i++] = (frame.data.length >>  8) & 0xff;
-    body[i++] = (frame.data.length) & 0xff;
-    memcpy(&body[i], frame.data.bytes, frame.data.length);
-    
-    [self sendPacket:RTMP_PACKET_TYPE_VIDEO data:body size:(rtmpLength) nTimestamp:frame.timestamp];
+    bool isssss = [self sendPacket:RTMP_PACKET_TYPE_VIDEO data:body size:(rtmpLength) nTimestamp:frame.timestamp];
+    [_delegate size:iIndex :isssss];
+
     free(body);
 }
 
@@ -629,7 +629,7 @@ print_bytes(void   *start,
     memcpy(&body[i], frame.data.bytes, frame.data.length);
     i += frame.data.length;
     
-    [self sendPacket:RTMP_PACKET_TYPE_VIDEO data:body size:(rtmpLength) nTimestamp:frame.timestamp];
+    bool isSusscessed = [self sendPacket:RTMP_PACKET_TYPE_VIDEO data:body size:(rtmpLength) nTimestamp:frame.timestamp];
     free(body);
 }
 
@@ -684,10 +684,13 @@ print_bytes(void   *start,
     unsigned char *body = (unsigned char *)malloc(rtmpLength);
     memset(body, 0, rtmpLength);
     
-    /*AF 01 + AAC RAW data*/
-    body[0] = 0xAF;
-    body[1] = 0x01;
-    memcpy(&body[2], frame.data.bytes, frame.data.length);
+    if(_isSend) {
+        /*AF 01 + AAC RAW data*/
+        body[0] = 0xAF;
+        body[1] = 0x01;
+        memcpy(&body[2], frame.data.bytes, frame.data.length);
+    }
+
     [self sendPacket:RTMP_PACKET_TYPE_AUDIO data:body size:rtmpLength nTimestamp:frame.timestamp];
     free(body);
 }

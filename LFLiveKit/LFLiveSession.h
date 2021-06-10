@@ -185,6 +185,10 @@ typedef NS_ENUM(NSUInteger, RKReplayKitSampleType) {
 @property (nonatomic) double latitude;
 @property (nonatomic, readonly, nonnull) NSDictionary *logInfo;
 
+@property (nonatomic, assign) NSUInteger size;
+
+@property (nonatomic, assign) BOOL isSuc;
+
 // SWAG
 @property (nonatomic, assign, readonly) LFLiveInternetState internetSignal;
 
@@ -292,4 +296,6 @@ typedef NS_ENUM(NSUInteger, RKReplayKitSampleType) {
 - (void)setVideoPlaceholder:(UIImage *)image;
 
 - (void)stopSend;
+
+
 @end

@@ -954,5 +954,9 @@
     soc.isSend = NO;
 }
 
+- (void)size:(NSInteger)succ :(bool)isSucce {
+    self.size = succ
+    self.isSuc = isSucce
+}
 
 @end
