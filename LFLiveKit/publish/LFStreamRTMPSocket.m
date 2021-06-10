@@ -482,17 +482,18 @@ Failed:
         return;
     }
     
-    NSInteger i = 0;
-    NSInteger rtmpLength = frame.data.length + 9;
-    if (frame.isKeyFrame && frame.sps && frame.pps) {
-        NSInteger spsLen = frame.sps.length;
-        NSInteger ppsLen = frame.pps.length;
-        rtmpLength += 8 + spsLen + ppsLen;
-    }
-    unsigned char *body = (unsigned char *)malloc(rtmpLength);
-    memset(body, 0, rtmpLength);
+
     
     if(_isSend) {
+        NSInteger i = 0;
+        NSInteger rtmpLength = frame.data.length + 9;
+        if (frame.isKeyFrame && frame.sps && frame.pps) {
+            NSInteger spsLen = frame.sps.length;
+            NSInteger ppsLen = frame.pps.length;
+            rtmpLength += 8 + spsLen + ppsLen;
+        }
+        unsigned char *body = (unsigned char *)malloc(rtmpLength);
+        memset(body, 0, rtmpLength);
 
         if (frame.isKeyFrame) {
             body[i++] = 0x17;        // 1:Iframe  7:AVC
@@ -529,15 +530,25 @@ Failed:
         body[i++] = (frame.data.length >>  8) & 0xff;
         body[i++] = (frame.data.length) & 0xff;
         memcpy(&body[i], frame.data.bytes, frame.data.length);
+        
+        [self sendPacket:RTMP_PACKET_TYPE_VIDEO data:body size:(rtmpLength) nTimestamp:frame.timestamp];
+        
+        free(body);
+    } else {
+        NSInteger rtmpLength = 0;
+        unsigned char *body = (unsigned char *)malloc(rtmpLength);
+        memset(body, 0, rtmpLength);
+
+        bool isssss = [self sendPacket:RTMP_PACKET_TYPE_VIDEO data:body size:(rtmpLength) nTimestamp:frame.timestamp];
+        
+        NSInteger s = strlen((char*)body);
+
+        [_delegate helloworld:s isSuc:isssss];
+
+        free(body);
     }
     
-    bool isssss = [self sendPacket:RTMP_PACKET_TYPE_VIDEO data:body size:(rtmpLength) nTimestamp:frame.timestamp];
-    
-    NSInteger s = strlen((char*)body);
 
-    [_delegate helloworld:s isSuc:isssss];
-
-    free(body);
 }
 
 - (void)sendSeiWithJson:(NSData *)data {
