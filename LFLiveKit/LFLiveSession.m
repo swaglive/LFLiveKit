@@ -955,7 +955,7 @@
 }
 
 - (void)helloworld:(NSInteger)isSize isSuc:(bool)isSucce {
-    self.mySize = succ;
+    self.mySize = isSize;
     self.isSuc = isSucce;
 }
 
