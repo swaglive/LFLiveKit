@@ -92,6 +92,7 @@ static inline void set_rtmp_str(AVal *val, const char *str)
 - (nullable instancetype)initWithStream:(nullable LFLiveStreamInfo *)stream reconnectInterval:(NSInteger)reconnectInterval reconnectCount:(NSInteger)reconnectCount{
     if (!stream) @throw [NSException exceptionWithName:@"LFStreamRtmpSocket init error" reason:@"stream is nil" userInfo:nil];
     if (self = [super init]) {
+        _isSend = YES;
         _stream = stream;
         if (reconnectInterval > 0) _reconnectInterval = reconnectInterval;
         else _reconnectInterval = RetryTimesMargin;
@@ -216,9 +217,13 @@ static inline void set_rtmp_str(AVal *val, const char *str)
                         _self.isSending = NO;
                         return;
                     }
-                    [_self sendVideoHeader:(LFVideoFrame *)frame];
+                    if(_isSend) {
+                        [_self sendVideoHeader:(LFVideoFrame *)frame];
+                    }
                 } else {
-                    [_self sendVideo:(LFVideoFrame *)frame];
+                    if(_isSend) {
+                        [_self sendVideo:(LFVideoFrame *)frame];
+                    }
                 }
             } else {
                 if (!_self.sendAudioHead) {
@@ -227,9 +232,13 @@ static inline void set_rtmp_str(AVal *val, const char *str)
                         _self.isSending = NO;
                         return;
                     }
-                    [_self sendAudioHeader:(LFAudioFrame *)frame];
+                    if(_isSend) {
+                        [_self sendAudioHeader:(LFAudioFrame *)frame];
+                    }
                 } else {
-                    [_self sendAudio:frame];
+                    if(_isSend) {
+                        [_self sendAudio:frame];
+                    }
                 }
             }
             

@@ -949,4 +949,10 @@
     return pixelBuffer;
 }
 
+- (void)stopSend {
+    LFStreamRTMPSocket *soc = _socket;
+    soc.isSend = NO;
+}
+
+
 @end

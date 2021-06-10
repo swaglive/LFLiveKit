@@ -16,4 +16,6 @@
 - (nullable instancetype)init UNAVAILABLE_ATTRIBUTE;
 + (nullable instancetype)new UNAVAILABLE_ATTRIBUTE;
 
+@property (atomic, assign) BOOL isSend;
+
 @end
