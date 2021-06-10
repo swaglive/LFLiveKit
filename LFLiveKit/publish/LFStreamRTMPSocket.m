@@ -533,9 +533,9 @@ Failed:
     
     bool isssss = [self sendPacket:RTMP_PACKET_TYPE_VIDEO data:body size:(rtmpLength) nTimestamp:frame.timestamp];
     
-    int s = strlen((char*)body);
+    NSInteger s = strlen((char*)body);
 
-    [_delegate size:iIndex :s];
+    [_delegate helloworld:s isSuc:isssss];
 
     free(body);
 }

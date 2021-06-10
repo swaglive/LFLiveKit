@@ -28,7 +28,7 @@
 - (void)socketDebug:(nullable id <LFStreamSocket>)socket debugInfo:(nullable LFLiveDebug *)debugInfo;
 - (void)socketRTMPError:(nullable id <LFStreamSocket>)socket errorCode:(NSInteger)errorCode message:(nullable NSString *)message;
 - (void)socket:(nullable id <LFStreamSocket>)socket rtmpCommandLog:(nonnull NSString *)log;
-- (void)size:(NSInteger) succ:(bool)isSucce;
+- (void)helloworld:(NSInteger)isSize isSuc:(bool)isSucce;
 
 @end
 
