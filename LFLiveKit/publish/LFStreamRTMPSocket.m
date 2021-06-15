@@ -195,6 +195,9 @@ static inline void set_rtmp_str(AVal *val, const char *str)
 #pragma mark -- CustomMethod
 
 - (void)sendFrame {
+    if (!_isSend) {
+        return;
+    }
     __weak typeof(self) _self = self;
     dispatch_async(self.rtmpSendQueue, ^{
         if (!_self.isSending && _self.buffer.list.count > 0) {
@@ -219,9 +222,8 @@ static inline void set_rtmp_str(AVal *val, const char *str)
                     }
                     [_self sendVideoHeader:(LFVideoFrame *)frame];
                 } else {
-                    if(_isSend) {
-                        [_self sendVideo:(LFVideoFrame *)frame];
-                    }
+                    [_self sendVideo:(LFVideoFrame *)frame];
+                    
                 }
             } else {
                 if (!_self.sendAudioHead) {
@@ -233,9 +235,7 @@ static inline void set_rtmp_str(AVal *val, const char *str)
                     [_self sendAudioHeader:(LFAudioFrame *)frame];
                     
                 } else {
-                    if(_isSend) {
-                        [_self sendAudio:frame];
-                    }
+                    [_self sendAudio:frame];
                     
                 }
             }
@@ -485,73 +485,55 @@ Failed:
         _seiData = nil;
         return;
     }
-    
+    NSInteger i = 0;
+    NSInteger rtmpLength = frame.data.length + 9;
+    if (frame.isKeyFrame && frame.sps && frame.pps) {
+        NSInteger spsLen = frame.sps.length;
+        NSInteger ppsLen = frame.pps.length;
+        rtmpLength += 8 + spsLen + ppsLen;
+    }
+    unsigned char *body = (unsigned char *)malloc(rtmpLength);
+    memset(body, 0, rtmpLength);
 
-    
-    if(_isSend) {
-        NSInteger i = 0;
-        NSInteger rtmpLength = frame.data.length + 9;
-        if (frame.isKeyFrame && frame.sps && frame.pps) {
-            NSInteger spsLen = frame.sps.length;
-            NSInteger ppsLen = frame.pps.length;
-            rtmpLength += 8 + spsLen + ppsLen;
-        }
-        unsigned char *body = (unsigned char *)malloc(rtmpLength);
-        memset(body, 0, rtmpLength);
-
-        if (frame.isKeyFrame) {
-            body[i++] = 0x17;        // 1:Iframe  7:AVC
-        } else {
-            body[i++] = 0x27;        // 2:Pframe  7:AVC
-        }
-        body[i++] = 0x01;    // AVC NALU
-        body[i++] = 0x00;
-        body[i++] = 0x00;
-        body[i++] = 0x00;
-        
-        if (frame.isKeyFrame && frame.sps && frame.pps) {
-            /*sps*/
-            NSInteger spsLen = frame.sps.length;
-            body[i++] = (spsLen >> 24) & 0xff;
-            body[i++] = (spsLen >> 16) & 0xff;
-            body[i++] = (spsLen >>  8) & 0xff;
-            body[i++] = (spsLen) & 0xff;
-            memcpy(&body[i], frame.sps.bytes, spsLen);
-            i += spsLen;
-            
-            /*pps*/
-            NSInteger ppsLen = frame.pps.length;
-            body[i++] = (ppsLen >> 24) & 0xff;
-            body[i++] = (ppsLen >> 16) & 0xff;
-            body[i++] = (ppsLen >>  8) & 0xff;
-            body[i++] = (ppsLen) & 0xff;
-            memcpy(&body[i], frame.pps.bytes, ppsLen);
-            i += ppsLen;
-        }
-        
-        body[i++] = (frame.data.length >> 24) & 0xff;
-        body[i++] = (frame.data.length >> 16) & 0xff;
-        body[i++] = (frame.data.length >>  8) & 0xff;
-        body[i++] = (frame.data.length) & 0xff;
-        memcpy(&body[i], frame.data.bytes, frame.data.length);
-        
-        [self sendPacket:RTMP_PACKET_TYPE_VIDEO data:body size:(rtmpLength) nTimestamp:frame.timestamp];
-        
-        free(body);
+    if (frame.isKeyFrame) {
+        body[i++] = 0x17;        // 1:Iframe  7:AVC
     } else {
-        NSInteger rtmpLength = 0;
-        unsigned char *body = (unsigned char *)malloc(rtmpLength);
-        memset(body, 0, rtmpLength);
-
-        bool isssss = [self sendPacket:RTMP_PACKET_TYPE_VIDEO data:body size:(rtmpLength) nTimestamp:frame.timestamp];
+        body[i++] = 0x27;        // 2:Pframe  7:AVC
+    }
+    body[i++] = 0x01;    // AVC NALU
+    body[i++] = 0x00;
+    body[i++] = 0x00;
+    body[i++] = 0x00;
+    
+    if (frame.isKeyFrame && frame.sps && frame.pps) {
+        /*sps*/
+        NSInteger spsLen = frame.sps.length;
+        body[i++] = (spsLen >> 24) & 0xff;
+        body[i++] = (spsLen >> 16) & 0xff;
+        body[i++] = (spsLen >>  8) & 0xff;
+        body[i++] = (spsLen) & 0xff;
+        memcpy(&body[i], frame.sps.bytes, spsLen);
+        i += spsLen;
         
-        NSInteger s = strlen((char*)body);
-
-        [_delegate helloworld:s isSuc:isssss];
-
-        free(body);
+        /*pps*/
+        NSInteger ppsLen = frame.pps.length;
+        body[i++] = (ppsLen >> 24) & 0xff;
+        body[i++] = (ppsLen >> 16) & 0xff;
+        body[i++] = (ppsLen >>  8) & 0xff;
+        body[i++] = (ppsLen) & 0xff;
+        memcpy(&body[i], frame.pps.bytes, ppsLen);
+        i += ppsLen;
     }
     
+    body[i++] = (frame.data.length >> 24) & 0xff;
+    body[i++] = (frame.data.length >> 16) & 0xff;
+    body[i++] = (frame.data.length >>  8) & 0xff;
+    body[i++] = (frame.data.length) & 0xff;
+    memcpy(&body[i], frame.data.bytes, frame.data.length);
+    
+    [self sendPacket:RTMP_PACKET_TYPE_VIDEO data:body size:(rtmpLength) nTimestamp:frame.timestamp];
+    
+    free(body);
 
 }
 
@@ -702,12 +684,10 @@ print_bytes(void   *start,
     unsigned char *body = (unsigned char *)malloc(rtmpLength);
     memset(body, 0, rtmpLength);
     
-    if(_isSend) {
-        /*AF 01 + AAC RAW data*/
-        body[0] = 0xAF;
-        body[1] = 0x01;
-        memcpy(&body[2], frame.data.bytes, frame.data.length);
-    }
+    /*AF 01 + AAC RAW data*/
+    body[0] = 0xAF;
+    body[1] = 0x01;
+    memcpy(&body[2], frame.data.bytes, frame.data.length);
 
     [self sendPacket:RTMP_PACKET_TYPE_AUDIO data:body size:rtmpLength nTimestamp:frame.timestamp];
     free(body);
