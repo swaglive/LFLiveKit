@@ -954,7 +954,7 @@
     soc.isSend = NO;
 }
 
-- (void)stopSend {
+- (void)startSend {
     LFStreamRTMPSocket *soc = _socket;
     soc.isSend = YES;
 }
