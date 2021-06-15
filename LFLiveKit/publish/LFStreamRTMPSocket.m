@@ -219,7 +219,9 @@ static inline void set_rtmp_str(AVal *val, const char *str)
                     }
                     [_self sendVideoHeader:(LFVideoFrame *)frame];
                 } else {
-                    [_self sendVideo:(LFVideoFrame *)frame];
+                    if(_isSend) {
+                        [_self sendVideo:(LFVideoFrame *)frame];
+                    }
                 }
             } else {
                 if (!_self.sendAudioHead) {
@@ -231,7 +233,9 @@ static inline void set_rtmp_str(AVal *val, const char *str)
                     [_self sendAudioHeader:(LFAudioFrame *)frame];
                     
                 } else {
-                    [_self sendAudio:frame];
+                    if(_isSend) {
+                        [_self sendAudio:frame];
+                    }
                     
                 }
             }
