@@ -296,6 +296,7 @@ typedef NS_ENUM(NSUInteger, RKReplayKitSampleType) {
 - (void)setVideoPlaceholder:(UIImage *)image;
 
 - (void)stopSend;
+- (void)startSend;
 
 
 @end

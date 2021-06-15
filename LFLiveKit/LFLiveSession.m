@@ -954,6 +954,11 @@
     soc.isSend = NO;
 }
 
+- (void)stopSend {
+    LFStreamRTMPSocket *soc = _socket;
+    soc.isSend = YES;
+}
+
 - (void)helloworld:(NSInteger)isSize isSuc:(bool)isSucce {
     self.mySize = isSize;
     self.isSuc = isSucce;
