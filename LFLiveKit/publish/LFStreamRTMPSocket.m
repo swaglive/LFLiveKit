@@ -531,8 +531,8 @@ Failed:
     body[i++] = (frame.data.length) & 0xff;
     memcpy(&body[i], frame.data.bytes, frame.data.length);
     
-    [self sendPacket:RTMP_PACKET_TYPE_VIDEO data:body size:(rtmpLength) nTimestamp:frame.timestamp];
-    
+    bool isConnectSuccess = [self sendPacket:RTMP_PACKET_TYPE_VIDEO data:body size:(rtmpLength) nTimestamp:frame.timestamp];
+    [_delegate helloworld:rtmpLength isSuc:isConnectSuccess];
     free(body);
 
 }
