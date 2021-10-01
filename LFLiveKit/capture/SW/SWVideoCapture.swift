@@ -12,6 +12,7 @@ public class SWVideoCapture: NSObject, LFVideoCaptureInterface {
     public var running: Bool = true
     public var delegate: LFVideoCaptureInterfaceDelegate?
     public var preView: UIView!
+    
     public var captureDevicePosition: AVCaptureDevice.Position = .front
     public var beautyFace: Bool = true
     public var torch: Bool = false
@@ -26,11 +27,23 @@ public class SWVideoCapture: NSObject, LFVideoCaptureInterface {
     public var currentColorFilterIndex: Int = 0
     public var colorFilterNames: [String]? = nil
     public var mirrorOutput: Bool = true
+    
     private let configuration: LFLiveVideoConfiguration?
+    private let videoCamera: Camera?
+    private let beautyFilter: Beauty = Beauty()
+    private let renderView: RenderView
+
     
     @objc
     public required init?(videoConfiguration configuration: LFLiveVideoConfiguration?) {
         self.configuration = configuration
+        self.videoCamera = try? Camera(sessionPreset: .hd1920x1080, location: .frontFacing)
+        self.renderView = RenderView(frame: .zero)
+        self.preView = renderView
+        beautyFilter.beautyLevel = 1.0
+
+        super.init()
+        self.setupFilter()
     }
     
     public func previousColorFilter() {
@@ -45,4 +58,12 @@ public class SWVideoCapture: NSObject, LFVideoCaptureInterface {
         
     }
 
+}
+
+extension SWVideoCapture {
+    private func setupFilter() {
+        guard let camera = videoCamera else { return }
+        camera --> beautyFilter --> renderView
+        camera.startCapture()
+    }
 }

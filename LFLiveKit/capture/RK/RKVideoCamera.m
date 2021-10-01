@@ -21,8 +21,10 @@
 - (instancetype)initWithSessionPreset:(NSString *)sessionPreset cameraPosition:(AVCaptureDevicePosition)cameraPosition {
     if (self = [super init]) {
         _cameraProcessingQueue = dispatch_get_global_queue(DISPATCH_QUEUE_PRIORITY_HIGH, 0);
-        
-        NSArray *devices = [AVCaptureDevice devicesWithMediaType:AVMediaTypeVideo];
+        AVCaptureDeviceDiscoverySession *captureDeviceDiscoverySession = [AVCaptureDeviceDiscoverySession discoverySessionWithDeviceTypes:@[AVCaptureDeviceTypeBuiltInWideAngleCamera]
+                                              mediaType:AVMediaTypeVideo
+                                               position:AVCaptureDevicePositionFront];
+        NSArray *devices = [captureDeviceDiscoverySession devices];
         for (AVCaptureDevice *device in devices) {
             if (device.position == cameraPosition) {
                 _captureDevice = device;
