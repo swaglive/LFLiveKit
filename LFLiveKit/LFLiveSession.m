@@ -21,6 +21,8 @@
 #import "RKAudioMix.h"
 #import "RKReplayKitCapture.h"
 #import "BitrateHandler.h"
+#import <LFLiveKit/LFLiveKit-Swift.h>
+
 
 @implementation UIImage (Resize)
 - (UIImage *)scaledToSize:(CGSize)newSize {
@@ -812,12 +814,13 @@
 - (id<LFVideoCaptureInterface>)videoCaptureSource {
     if (!_videoCaptureSource) {
         if(self.captureType & LFLiveCaptureMaskVideo){
-            if (_gpuimageOn) {
-                _videoCaptureSource = [[LFVideoCapture alloc] initWithVideoConfiguration:_videoConfiguration];
-                ((LFVideoCapture*)_videoCaptureSource).useAdvanceBeauty = _gpuimageAdvanceBeautyEnabled;
-            } else {
-                _videoCaptureSource = [[RKVideoCapture alloc] initWithVideoConfiguration:_videoConfiguration eaglContext:_glContext];
-            }
+            _videoCaptureSource = [[SWVideoCapture alloc] initWithVideoConfiguration:_videoConfiguration];
+//            if (_gpuimageOn) {
+//                _videoCaptureSource = [[LFVideoCapture alloc] initWithVideoConfiguration:_videoConfiguration];
+//                ((LFVideoCapture*)_videoCaptureSource).useAdvanceBeauty = _gpuimageAdvanceBeautyEnabled;
+//            } else {
+//                _videoCaptureSource = [[RKVideoCapture alloc] initWithVideoConfiguration:_videoConfiguration eaglContext:_glContext];
+//            }
             _videoCaptureSource.delegate = self;
         }
     }
