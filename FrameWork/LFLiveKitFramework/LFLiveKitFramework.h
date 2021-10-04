@@ -25,3 +25,4 @@ FOUNDATION_EXPORT const unsigned char LFLiveKitFrameworkVersionString[];
 #import <LFLiveKit/LFVideoFrame.h>
 #import <LFLiveKit/LFLiveDebug.h>
 #import <LFLiveKit/GPUImage.h>
+#import <LFLiveKit/LFVideoCaptureInterface.h>
