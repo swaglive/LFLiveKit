@@ -11,7 +11,7 @@ Pod::Spec.new do |s|
   s.ios.deployment_target = "13.0"
   s.source       = { :git => "https://github.com/LaiFengiOS/LFLiveKit.git", :tag => "#{s.version}" }
   s.source_files  = "LFLiveKit/**/*.{h,m,mm,cpp,c,swift,metal}"
-  s.public_header_files = ['LFLiveKit/*.h', 'LFLiveKit/objects/*.h', 'LFLiveKit/configuration/*.h']
+  s.public_header_files = ['LFLiveKit/*.h', 'LFLiveKit/objects/*.h', 'LFLiveKit/configuration/*.h', 'LFLiveKit/capture/LF/*.h']
 
   s.frameworks = "VideoToolbox", "AudioToolbox","AVFoundation","Foundation","UIKit"
   s.libraries = "c++", "z"
