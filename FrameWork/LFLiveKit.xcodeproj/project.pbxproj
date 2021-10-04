@@ -685,6 +685,7 @@
 		84D8B5E81D768B6E00752B56 /* LFStreamSocket.h in Headers */ = {isa = PBXBuildFile; fileRef = 84D8B5B81D768B6E00752B56 /* LFStreamSocket.h */; };
 		84D8B5E91D768B6E00752B56 /* NSMutableArray+LFAdd.h in Headers */ = {isa = PBXBuildFile; fileRef = 84D8B5B91D768B6E00752B56 /* NSMutableArray+LFAdd.h */; };
 		84D8B5EA1D768B6E00752B56 /* NSMutableArray+LFAdd.m in Sources */ = {isa = PBXBuildFile; fileRef = 84D8B5BA1D768B6E00752B56 /* NSMutableArray+LFAdd.m */; };
+		B65687ED270ADFFB008130BB /* LFVideoCaptureInterface.h in Headers */ = {isa = PBXBuildFile; fileRef = B660A91F27071469003A6766 /* LFVideoCaptureInterface.h */; settings = {ATTRIBUTES = (Public, ); }; };
 		B660A92C27071469003A6766 /* LFVideoCapture.m in Sources */ = {isa = PBXBuildFile; fileRef = B660A91E27071469003A6766 /* LFVideoCapture.m */; };
 		B660A92D27071469003A6766 /* LFVideoCaptureInterface.h in Headers */ = {isa = PBXBuildFile; fileRef = B660A91F27071469003A6766 /* LFVideoCaptureInterface.h */; settings = {ATTRIBUTES = (Public, ); }; };
 		B660A92E27071469003A6766 /* LFAudioCapture.h in Headers */ = {isa = PBXBuildFile; fileRef = B660A92027071469003A6766 /* LFAudioCapture.h */; };
@@ -3709,6 +3710,7 @@
 				BE4935F0200866A6003F5291 /* QBGLColorMapFilter+Factory.h in Headers */,
 				BE49355720076CA3003F5291 /* QBGLSunriseFilter.h in Headers */,
 				BE49354920076CA3003F5291 /* QBGLRiseFilter.h in Headers */,
+				B65687ED270ADFFB008130BB /* LFVideoCaptureInterface.h in Headers */,
 				C16E7D1A1E5348A40067DE28 /* RKGPUImageSunsetFilter.h in Headers */,
 				8495F67D1DB8F1EE00542124 /* LFVideoEncoding.h in Headers */,
 				BE35EB751F5D3EE600B615DF /* RKAudioMix.h in Headers */,
