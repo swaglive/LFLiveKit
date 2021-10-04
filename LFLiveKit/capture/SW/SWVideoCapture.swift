@@ -29,7 +29,7 @@ public class SWVideoCapture: NSObject, LFVideoCaptureInterface {
     
     private let configuration: LFLiveVideoConfiguration?
     private let videoCamera: Camera?
-    private let beautyFilter: Beauty = Beauty()
+//    private let beautyFilter: Beauty = Beauty()
     private let renderView: RenderView
 
     
@@ -38,7 +38,7 @@ public class SWVideoCapture: NSObject, LFVideoCaptureInterface {
         self.configuration = configuration
         self.videoCamera = try? Camera(sessionPreset: .hd1920x1080, location: .frontFacing)
         self.renderView = RenderView(frame: CGRect(origin: .zero, size: CGSize(width: 1920, height: 1080)))
-        beautyFilter.beautyLevel = 1.0
+//        beautyFilter.beautyLevel = 1.0
 
         super.init()
         self.setupFilter()
@@ -77,7 +77,8 @@ extension SWVideoCapture {
     
     private func setupFilter() {
         guard let camera = videoCamera else { return }
-        camera --> beautyFilter --> renderView
+        camera --> renderView
+//        camera --> beautyFilter --> renderView
         camera.startCapture()
     }
 }
