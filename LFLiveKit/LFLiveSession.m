@@ -21,7 +21,7 @@
 #import "RKAudioMix.h"
 #import "RKReplayKitCapture.h"
 #import "BitrateHandler.h"
-#import <LFLiveKit/LFLiveKit-Swift.h>
+#import "LFLiveKit-Swift.h"
 
 
 @implementation UIImage (Resize)
