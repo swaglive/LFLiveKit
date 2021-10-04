@@ -43,6 +43,7 @@ public class SWVideoCapture: NSObject, LFVideoCaptureInterface {
         super.init()
         self.setupFilter()
         
+        videoCamera?.delegate = self
 
     }
     
@@ -79,4 +80,17 @@ extension SWVideoCapture {
         camera --> beautyFilter --> renderView
         camera.startCapture()
     }
+}
+
+
+extension SWVideoCapture: CameraDelegate {
+    public func didCaptureBuffer(_ sampleBuffer: CMSampleBuffer) {
+//        renderView.
+        let pixelBuffer = CMSampleBufferGetImageBuffer(sampleBuffer)
+        let time = CMSampleBufferGetPresentationTimeStamp(sampleBuffer)
+        //CMTime time = CMSampleBufferGetPresentationTimeStamp(sampleBuffer);
+        delegate?.captureOutput?(self, pixelBuffer: pixelBuffer, at: time)
+
+    }
+
 }
