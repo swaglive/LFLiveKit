@@ -15,6 +15,6 @@ Pod::Spec.new do |s|
 
   s.frameworks = "VideoToolbox", "AudioToolbox","AVFoundation","Foundation","UIKit"
   s.libraries = "c++", "z"
-
+  s.static_frameworks = false
   s.requires_arc = true
 end
