@@ -64,7 +64,7 @@ typedef NS_ENUM(NSUInteger, RKReplayKitSampleType) {
     RKReplayKitSampleTypeMicAudio
 };
 
-@class LFLiveSession;
+@class LFLiveSession, SWVideoCapture;
 @protocol LFLiveSessionDelegate <NSObject>
 
 @optional
