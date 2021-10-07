@@ -697,6 +697,8 @@
 		84D8B5E81D768B6E00752B56 /* LFStreamSocket.h in Headers */ = {isa = PBXBuildFile; fileRef = 84D8B5B81D768B6E00752B56 /* LFStreamSocket.h */; };
 		84D8B5E91D768B6E00752B56 /* NSMutableArray+LFAdd.h in Headers */ = {isa = PBXBuildFile; fileRef = 84D8B5B91D768B6E00752B56 /* NSMutableArray+LFAdd.h */; };
 		84D8B5EA1D768B6E00752B56 /* NSMutableArray+LFAdd.m in Sources */ = {isa = PBXBuildFile; fileRef = 84D8B5BA1D768B6E00752B56 /* NSMutableArray+LFAdd.m */; };
+		B6BE4B50270D856A00D2218F /* BBVideoCapture.swift in Sources */ = {isa = PBXBuildFile; fileRef = B6BE4B4F270D856A00D2218F /* BBVideoCapture.swift */; };
+		B6BE4B51270D856A00D2218F /* BBVideoCapture.swift in Sources */ = {isa = PBXBuildFile; fileRef = B6BE4B4F270D856A00D2218F /* BBVideoCapture.swift */; };
 		BE2F236820899E5800516C0F /* QBGLYuvFilter.h in Headers */ = {isa = PBXBuildFile; fileRef = BE2F236620899E5400516C0F /* QBGLYuvFilter.h */; };
 		BE2F236920899E5800516C0F /* QBGLYuvFilter.h in Headers */ = {isa = PBXBuildFile; fileRef = BE2F236620899E5400516C0F /* QBGLYuvFilter.h */; };
 		BE2F236A20899E5800516C0F /* QBGLYuvFilter.m in Sources */ = {isa = PBXBuildFile; fileRef = BE2F236720899E5700516C0F /* QBGLYuvFilter.m */; };
@@ -742,7 +744,7 @@
 		BE3B63801FFBA19B003EA717 /* RKGPUImageEyeFilter.m in Sources */ = {isa = PBXBuildFile; fileRef = BE3B637D1FFBA19A003EA717 /* RKGPUImageEyeFilter.m */; };
 		BE3B63811FFBA19B003EA717 /* RKGPUImageEyeFilter.m in Sources */ = {isa = PBXBuildFile; fileRef = BE3B637D1FFBA19A003EA717 /* RKGPUImageEyeFilter.m */; };
 		BE4059691F95CF0E00BF9962 /* GPUImage.h in Headers */ = {isa = PBXBuildFile; fileRef = 84358E891DD1FEB500811FC7 /* GPUImage.h */; settings = {ATTRIBUTES = (Public, ); }; };
-		BE4933C120076348003F5291 /* LFVideoCaptureInterface.h in Headers */ = {isa = PBXBuildFile; fileRef = BE4933BF20076348003F5291 /* LFVideoCaptureInterface.h */; };
+		BE4933C120076348003F5291 /* LFVideoCaptureInterface.h in Headers */ = {isa = PBXBuildFile; fileRef = BE4933BF20076348003F5291 /* LFVideoCaptureInterface.h */; settings = {ATTRIBUTES = (Public, ); }; };
 		BE4933C220076348003F5291 /* LFVideoCaptureInterface.h in Headers */ = {isa = PBXBuildFile; fileRef = BE4933BF20076348003F5291 /* LFVideoCaptureInterface.h */; };
 		BE4933C7200768CB003F5291 /* RKVideoCapture.h in Headers */ = {isa = PBXBuildFile; fileRef = BE4933C5200768CB003F5291 /* RKVideoCapture.h */; };
 		BE4933C8200768CB003F5291 /* RKVideoCapture.h in Headers */ = {isa = PBXBuildFile; fileRef = BE4933C5200768CB003F5291 /* RKVideoCapture.h */; };
@@ -1638,6 +1640,7 @@
 		84D8B5B81D768B6E00752B56 /* LFStreamSocket.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = LFStreamSocket.h; sourceTree = "<group>"; };
 		84D8B5B91D768B6E00752B56 /* NSMutableArray+LFAdd.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "NSMutableArray+LFAdd.h"; sourceTree = "<group>"; };
 		84D8B5BA1D768B6E00752B56 /* NSMutableArray+LFAdd.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "NSMutableArray+LFAdd.m"; sourceTree = "<group>"; };
+		B6BE4B4F270D856A00D2218F /* BBVideoCapture.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = BBVideoCapture.swift; sourceTree = "<group>"; };
 		BE2F236620899E5400516C0F /* QBGLYuvFilter.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = QBGLYuvFilter.h; sourceTree = "<group>"; };
 		BE2F236720899E5700516C0F /* QBGLYuvFilter.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = QBGLYuvFilter.m; sourceTree = "<group>"; };
 		BE35EB6B1F5D2F3500B615DF /* RKSoundMix.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = RKSoundMix.h; sourceTree = "<group>"; };
@@ -2452,6 +2455,7 @@
 				BE4935DC200777A2003F5291 /* RKVideoCamera.m */,
 				BE4933C5200768CB003F5291 /* RKVideoCapture.h */,
 				BE4933C6200768CB003F5291 /* RKVideoCapture.m */,
+				B6BE4B4F270D856A00D2218F /* BBVideoCapture.swift */,
 			);
 			path = capture;
 			sourceTree = "<group>";
@@ -3474,6 +3478,7 @@
 				TargetAttributes = {
 					8495F66A1DB8F14600542124 = {
 						CreatedOnToolsVersion = 8.0;
+						LastSwiftMigration = 1250;
 						ProvisioningStyle = Automatic;
 					};
 					84D003751DB8FE1000560583 = {
@@ -3483,6 +3488,7 @@
 					};
 					84D8B38F1D7574D600752B56 = {
 						CreatedOnToolsVersion = 7.3.1;
+						LastSwiftMigration = 1250;
 					};
 					C1FF50A01E46520D0029A4D4 = {
 						CreatedOnToolsVersion = 8.2;
@@ -3496,6 +3502,7 @@
 			developmentRegion = English;
 			hasScannedForEncodings = 0;
 			knownRegions = (
+				English,
 				en,
 				Base,
 				id,
@@ -3746,6 +3753,7 @@
 				843591A31DD20A7E00811FC7 /* GPUImageGaussianSelectiveBlurFilter.m in Sources */,
 				843591A41DD20A7E00811FC7 /* GPUImageGlassSphereFilter.m in Sources */,
 				C16E7D6A1E53F5360067DE28 /* RKGPUImageFreedomFilter.m in Sources */,
+				B6BE4B51270D856A00D2218F /* BBVideoCapture.swift in Sources */,
 				843591A51DD20A7E00811FC7 /* GPUImageGrayscaleFilter.m in Sources */,
 				843591A61DD20A7F00811FC7 /* GPUImageHalftoneFilter.m in Sources */,
 				C16E7D341E53499C0067DE28 /* RKGPUImageDreamFilter.m in Sources */,
@@ -4091,6 +4099,7 @@
 				BE35EB8F1F72736600B615DF /* LFPingServices.m in Sources */,
 				C16E7D271E5349330067DE28 /* RKGPUImageFreezeFilter.m in Sources */,
 				843591201DD1FEB600811FC7 /* GPUImageThresholdSketchFilter.m in Sources */,
+				B6BE4B50270D856A00D2218F /* BBVideoCapture.swift in Sources */,
 				843590B81DD1FEB600811FC7 /* GPUImageMovieComposition.m in Sources */,
 				843590C81DD1FEB600811FC7 /* GPUImageOverlayBlendFilter.m in Sources */,
 				BE4935DF200777A2003F5291 /* RKVideoCamera.m in Sources */,
@@ -4325,6 +4334,7 @@
 		8495F6711DB8F14600542124 /* Debug */ = {
 			isa = XCBuildConfiguration;
 			buildSettings = {
+				CLANG_ENABLE_MODULES = YES;
 				CLANG_WARN_DOCUMENTATION_COMMENTS = YES;
 				CLANG_WARN_INFINITE_RECURSION = YES;
 				CLANG_WARN_SUSPICIOUS_MOVES = YES;
@@ -4344,12 +4354,15 @@
 				PRODUCT_BUNDLE_IDENTIFIER = com.youku.LFLiveKit;
 				PRODUCT_NAME = LFLiveKit;
 				SKIP_INSTALL = YES;
+				SWIFT_OPTIMIZATION_LEVEL = "-Onone";
+				SWIFT_VERSION = 5.0;
 			};
 			name = Debug;
 		};
 		8495F6721DB8F14600542124 /* Release */ = {
 			isa = XCBuildConfiguration;
 			buildSettings = {
+				CLANG_ENABLE_MODULES = YES;
 				CLANG_WARN_DOCUMENTATION_COMMENTS = YES;
 				CLANG_WARN_INFINITE_RECURSION = YES;
 				CLANG_WARN_SUSPICIOUS_MOVES = YES;
@@ -4369,6 +4382,7 @@
 				PRODUCT_BUNDLE_IDENTIFIER = com.youku.LFLiveKit;
 				PRODUCT_NAME = LFLiveKit;
 				SKIP_INSTALL = YES;
+				SWIFT_VERSION = 5.0;
 			};
 			name = Release;
 		};
@@ -4481,6 +4495,7 @@
 		84D8B3991D7574D600752B56 /* Debug */ = {
 			isa = XCBuildConfiguration;
 			buildSettings = {
+				CLANG_ENABLE_MODULES = YES;
 				DEFINES_MODULE = YES;
 				DYLIB_COMPATIBILITY_VERSION = 1;
 				DYLIB_CURRENT_VERSION = 1;
@@ -4499,12 +4514,15 @@
 				PRODUCT_BUNDLE_IDENTIFIER = com.youku.LFLiveKit;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				SKIP_INSTALL = YES;
+				SWIFT_OPTIMIZATION_LEVEL = "-Onone";
+				SWIFT_VERSION = 5.0;
 			};
 			name = Debug;
 		};
 		84D8B39A1D7574D600752B56 /* Release */ = {
 			isa = XCBuildConfiguration;
 			buildSettings = {
+				CLANG_ENABLE_MODULES = YES;
 				DEFINES_MODULE = YES;
 				DYLIB_COMPATIBILITY_VERSION = 1;
 				DYLIB_CURRENT_VERSION = 1;
@@ -4523,6 +4541,7 @@
 				PRODUCT_BUNDLE_IDENTIFIER = com.youku.LFLiveKit;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				SKIP_INSTALL = YES;
+				SWIFT_VERSION = 5.0;
 			};
 			name = Release;
 		};
