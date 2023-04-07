@@ -92,7 +92,7 @@
             configuration.videoSize = CGSizeMake(720, 1280);
         } break;
         case LFLiveVideoQuality_High2:{
-            configuration.videoFrameRate = 24;
+            configuration.videoFrameRate = 15;
             configuration.videoMaxFrameRate = 24;
             configuration.videoMinFrameRate = 12;
             configuration.videoBitRate = 1200 * 1000;

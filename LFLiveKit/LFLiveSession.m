@@ -453,7 +453,7 @@
 #endif
         NSUInteger adjustment = 1;
         if ([[[UIDevice currentDevice] systemVersion] isEqualToString:@"16.4"]) {
-            adjustment = 4.8;
+            adjustment = 4;
         }
         [self.videoEncoder setVideoBitRate:expected * adjustment];
           
