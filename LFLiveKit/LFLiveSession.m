@@ -452,8 +452,13 @@
         NSLog(@"change bitrate !!!! %@", @(expected));
 #endif
         NSUInteger adjustment = 1;
-        if ([[[UIDevice currentDevice] systemVersion] isEqualToString:@"16.4"]) {
-            adjustment = 4;
+        //TODO: If this issue persists, it would need remote config
+        NSString *version = [[UIDevice currentDevice] systemVersion];
+        NSArray<NSString *> *brokenVersions = @[@"16.4", @"16.4.1"];
+        for (NSString *brokenVersion in brokenVersions) {
+            if ([version isEqualToString:brokenVersion]) {
+                adjustment = 4;
+            }
         }
         [self.videoEncoder setVideoBitRate:expected * adjustment];
           
